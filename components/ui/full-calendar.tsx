@@ -167,7 +167,7 @@ const CalendarViewTrigger = forwardRef<
     React.HTMLAttributes<HTMLButtonElement> & {
     view: View;
 }
->(({ children, view, ...props }, ref) => {
+>(({ children, view, ...props }) => {
     const { view: currentView, setView, onChangeView } = useCalendar();
 
     return (

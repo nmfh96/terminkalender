@@ -34,7 +34,7 @@ export function AppointmentForm() {
         e.preventDefault();
         setLoading(true);
 
-        const { data, error } = await supabase.from('appointments').insert([
+        const { error } = await supabase.from('appointments').insert([
             {
                 title,
                 start,

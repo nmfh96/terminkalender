@@ -1,12 +1,6 @@
 import { AppointmentForm } from '@/components/AppointmentForm';
 import { supabase } from '../lib/supabaseClient';
-import { Button } from "@/components/ui/button";
 import { ModeToggle } from '@/components/theme-toggle';
-import {
-    HoverCard,
-    HoverCardTrigger,
-    HoverCardContent,
-} from "@/components/ui/hover-card";
 import {
     Calendar,
     CalendarCurrentDate,
