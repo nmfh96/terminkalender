@@ -18,11 +18,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 type AllowedColors = "default" | "blue" | "green" | "pink" | "purple" | null | undefined;
 
 type CalendarEvent = {
-    id: any;
+    id: string | number;
     title: string;
     start: Date;
     end: Date;
-    notes?: string;
+    notes?: string | null;
     color?: AllowedColors;
 };
 
@@ -47,12 +47,12 @@ export default async function Page() {
 
     // Explizit den Typ für events angeben, damit color korrekt getypt ist
     const events: CalendarEvent[] = appointments.map((appt) => ({
-        id: appt.id,
+        id: appt.id as string | number,
         title: appt.title || 'Unbenannter Termin',
         start: new Date(appt.start),
         end: new Date(appt.end),
-        notes: appt.notes,
-        color: "default", // jetzt passend zum AllowedColors-Typ
+        notes: appt.notes ?? null,
+        color: "default",
     }));
 
     console.log('Geladene Termine:', appointments);
