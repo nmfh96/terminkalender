@@ -46,7 +46,7 @@ export default async function Page() {
         start: new Date(appt.start),
         end: new Date(appt.end),
         notes: appt.notes,
-        color: '#999999', // Standardfarbe, weil category nicht gesetzt
+        color: "default", // Standardfarbe, weil category nicht gesetzt
     }));
 
     console.log('Geladene Termine:', appointments);
