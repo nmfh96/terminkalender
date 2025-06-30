@@ -18,7 +18,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 type AllowedColors = "default" | "blue" | "green" | "pink" | "purple" | null | undefined;
 
 type CalendarEvent = {
-    id: string | number;
+    id: string ;
     title: string;
     start: Date;
     end: Date;
