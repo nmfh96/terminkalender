@@ -15,42 +15,47 @@ import {
 } from '@/components/ui/full-calendar';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default async function Page() {
-    // 📥 1. Termine aus Supabase holen
+type AllowedColors = "default" | "blue" | "green" | "pink" | "purple" | null | undefined;
 
+type CalendarEvent = {
+    id: any;
+    title: string;
+    start: Date;
+    end: Date;
+    notes?: string;
+    color?: AllowedColors;
+};
+
+export default async function Page() {
     console.log('👉 Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
     console.log('👉 Supabase Key:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-
 
     const { data: appointments, error } = await supabase
         .from('appointments')
         .select(`
-    id,
-    start,
-    end,
-    title,
-    notes
-  `);
-
-
+            id,
+            start,
+            end,
+            title,
+            notes
+        `);
 
     if (error) {
         console.error('Fehler beim Laden der Termine:', error.message);
         return <div>Fehler beim Laden der Termine: {error.message}</div>;
     }
 
-    // 🧠 2. Events für Kalender aufbereiten
-    const events = appointments.map((appt) => ({
+    // Explizit den Typ für events angeben, damit color korrekt getypt ist
+    const events: CalendarEvent[] = appointments.map((appt) => ({
         id: appt.id,
         title: appt.title || 'Unbenannter Termin',
         start: new Date(appt.start),
         end: new Date(appt.end),
         notes: appt.notes,
-        color: "default", // Standardfarbe, weil category nicht gesetzt
+        color: "default", // jetzt passend zum AllowedColors-Typ
     }));
 
     console.log('Geladene Termine:', appointments);
-
 
     return (
         <Calendar events={events}>
@@ -82,4 +87,3 @@ export default async function Page() {
         </Calendar>
     );
 }
-
